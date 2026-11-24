@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "input_root": "../data/input",
+  "original_cpp_root": "../data/holo/dynamic",
+  "reference_root": "../data/reference/dynamic",
+  "expected_width": 1920,
+  "expected_height": 1080,
+  "first_frame": 0,
+  "max_frames_per_sequence": 16,
+  "save_reconstructed_numeric_arrays": false,
+  "input_forward_mapping": false,
+  "input_clipping": "none",
+  "optics": {
+    "pixel_pitch_x_m": 3.6E-06,
+    "pixel_pitch_y_m": 3.6E-06,
+    "wavelengths_m": [6.38E-07, 5.32E-07, 4.5E-07],
+    "reconstruction_plane_z_m": [-0.001, -0.002111111111111111, -0.0032222222222222222, -0.004333333333333333, -0.0054444444444444445, -0.006555555555555556, -0.007666666666666666, -0.008777777777777778, -0.009888888888888888, -0.011],
+    "propagation_distance_sign": -1,
+    "field_scale_for_reconstruction_only": 1E-08,
+    "padding_factor": 2,
+    "phase_gradient_bandlimit": true,
+    "threads": 1,
+    "transfer_cache_mib": 512
+  },
+  "display": {
+    "quantity": "amplitude",
+    "clip_low": 0,
+    "clip_high": 1,
+    "gamma": 1,
+    "independent_image_normalization": false
+  },
+  "source_dataset_manifest": "../data/holo/dynamic/dataset.json"
+}

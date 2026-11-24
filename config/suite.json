@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "suite_id": "ps3dmvp_ra_v1",
+  "output_root": "results/ps3dmvp_ra_v1",
+  "width": 1920,
+  "height": 1080,
+  "frames": 16,
+  "first_frame": 0,
+  "frame_rate": 30,
+  "gop_size": 16,
+  "sequences": [
+    "alley_1",
+    "bandage_1",
+    "cave_2",
+    "market_2",
+    "mountain_1"
+  ],
+  "qp_lists": {
+    "baseline": [8, 12, 16, 20],
+    "ps3dmvp": [8, 12, 16, 20],
+    "ps3dmvp_theta": [8, 12, 16, 20]
+  },
+  "resources": {
+    "transfer_cache_mib": 4096,
+    "evaluation_slots": 2,
+    "encoding_slots": 16,
+    "reconstruction_threads": 8,
+    "validation_slots": 2
+  },
+  "retry": {
+    "preserve_failed_logs": true,
+    "validation_attempts": 1,
+    "maximum_attempts_per_invocation": 3,
+    "backoff_seconds": 30
+  },
+  "metrics": {
+    "ssim": true,
+    "phase_amplitude_threshold_relative": 0.001,
+    "save_preview": false,
+    "save_reconstruction_png": true,
+    "preview_frame": 8,
+    "preview_depth_index": 4
+  },
+  "storage": {
+    "keep_successful_reconstructions": false,
+    "keep_prepared_inputs": false,
+    "minimum_free_gib": 5
+  },
+  "adaptive_qp": {
+    "enabled": true,
+    "step": 3,
+    "maximum_extra_points_per_method": null,
+    "minimum_points_per_curve": 4,
+    "minimum_reconstruction_psnr_overlap_db": 1.0,
+    "minimum_reconstruction_ssim_overlap": 0.005,
+    "minimum_overlap_fraction": 0.5,
+    "minimum_rate_ratio": 1.1
+  },
+  "ps3dmvp": {
+    "rd_candidates": 4,
+    "search_range": 32,
+    "full_search": true,
+    "optimized_search": true
+  },
+  "methods": [
+    {
+      "profile": "baseline",
+      "theta_divisions": 1,
+      "id": "baseline",
+      "ps": false
+    },
+    {
+      "profile": "ps3dmvp",
+      "theta_divisions": 1,
+      "id": "ps3dmvp",
+      "ps": true
+    },
+    {
+      "profile": "ps3dmvp",
+      "theta_divisions": 16,
+      "id": "ps3dmvp_theta",
+      "ps": true
+    }
+  ],
+  "validation": {
+    "dataset": "dynamic",
+    "require_ps_selected": true,
+    "crop": {
+      "y": 416,
+      "x": 832,
+      "width": 256,
+      "height": 256
+    },
+    "channel": 1,
+    "qp": 8,
+    "frames": 3,
+    "sequence": "alley_1",
+    "verify_optimization": false
+  },
+  "codecs": {
+    "hm": {
+      "anchor_cfg": "config/hm_RA.cfg",
+      "decoder": "build/bin/hm/TAppDecoder.exe",
+      "profiles": "config/hm_profiles.json",
+      "encoder": "build/bin/hm/TAppEncoder.exe",
+      "qp_max": 51,
+      "qp_min": 0
+    },
+    "vvenc": {
+      "anchor_cfg": "config/vvenc_RA.cfg",
+      "decoder": "build/bin/vvdec/vvdecapp.exe",
+      "profiles": "config/vvenc_profiles.json",
+      "encoder": "build/bin/vvenc/vvencFFapp.exe",
+      "qp_max": 63,
+      "qp_min": 0
+    }
+  },
+  "groups": [
+    {
+      "codec": "hm",
+      "dataset": "dynamic",
+      "id": "hm_dynamic"
+    },
+    {
+      "codec": "hm",
+      "dataset": "static",
+      "id": "hm_static"
+    },
+    {
+      "codec": "vvenc",
+      "dataset": "dynamic",
+      "id": "vvenc_dynamic"
+    },
+    {
+      "codec": "vvenc",
+      "dataset": "static",
+      "id": "vvenc_static"
+    }
+  ]
+}
